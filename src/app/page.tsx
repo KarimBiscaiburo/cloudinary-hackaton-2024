@@ -1,24 +1,51 @@
+'use client'
 import { creepster, special_elite } from "./fonts";
+
 import style from "./page.module.css";
+import avatar from "./css/avatar.module.css";
+import dialogo from "./css/dialogo.module.css";
 
 import Image from "next/image";
 
-import avatar from "./img/avatar.png";
+import avatarImg from "./img/avatarImg.png";
+import { useState } from "react";
 
 export default function Home() {
+  const [mostrarAvatar, setMostrarAvatar] = useState(true);
+  const [mostrarDialogo, setMostrarDialogo] = useState(true);
+  const [textBtn, setTextBtn] = useState("¡Estoy listo!");
+
+  const mostrarDialogoClass = mostrarDialogo ? `${dialogo.globoContainer} ${dialogo.globoContainerActivo}` : `${dialogo.globoContainer}`
+  const mostrarAvatarClass = mostrarAvatar ? `${avatar.avatar} ${avatar.avatarActivo}` : `${avatar.avatar}`;
+
+  function algo() {
+    setMostrarAvatar(!mostrarAvatar)
+    setMostrarDialogo(!mostrarDialogo)
+  }
+
   return (
-    <div className={`${special_elite.className} h-full w-full flex flex-col justify-center items-center bg-fuchsia-950`}>
+    <div className={`${special_elite.className} ${style.container} bg-fuchsia-950`}>
 
-      <h1 className={`${creepster.className} text-5xl absolute top-1 dandoColor`}>Hackaton Halloween SpoOoOoOoky</h1>
+      <h1 className={`${creepster.className} ${style.title}`}>Hackaton Halloween SpoOoOoOoky</h1>
 
-      <main className="w-11/12 max-w-[1300px] h-[86%] bg-[url('./img/background_scenario.avif')] rounded-3xl bg-no-repeat bg-cover bg-bottom p-3">
-          <p className="text-white">afasfasfasf</p>
+      <main className={`${style.mainContainer}`}>
+
+          <div className={mostrarDialogoClass}>
+            <div className={`${dialogo.globoTexto} ${special_elite.className}`}>
+
+              <p className={special_elite.className}>¡La noche de Halloween está aquí y algo oscuro está sucediendo! En este mundo misterioso, las sombras y el silencio ocultan un desafío donde solo una persona puede estar en la cima. </p>
+              <p className={special_elite.className}>¿Te atreves a entrar y vivir una experiencia escalofriante? Una vez que cruces el umbral, no habrá vuelta atrás. La oscuridad te está esperando… ¿Estás preparado para enfrentar lo que se oculta en las sombras?</p>
+
+            </div>
+            <button onClick={algo} className={`${dialogo.btnListo} ${special_elite.className}`}>{textBtn}</button>
+          </div>
 
           <Image 
-            src={avatar}
+            src={avatarImg}
             alt="avatar"
-            width={250}
-            height={250}
+            width={400}
+            height={450}
+            className={mostrarAvatarClass}
           />
       </main>
     

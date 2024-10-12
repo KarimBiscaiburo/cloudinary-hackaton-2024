@@ -1,0 +1,70 @@
+.globoContainer {
+    position: absolute;
+    left: 400px;
+    top: 320px;
+    max-width: 400px;
+    animation: globoAparece .5s ease-in;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s all ease-in-out;
+}
+.globoContainerActivo {
+    top: 300px;
+    opacity: 1;
+    visibility: visible;
+}
+.globoTexto {
+    position: relative;
+    height: auto;
+    display: inline-block;
+    padding: 10px;
+    background-color: #DDD;
+    border-radius: 10px;
+    border: 3px solid #b4b4b4;
+    z-index: 100;
+}
+.globoTexto::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -13px;
+    background-color: #DDD;
+    width: 20px;
+    height: 20px;
+    border-left: 3px solid #b4b4b4;
+    border-bottom: 3px solid #b4b4b4;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+.globoTexto p {
+    font-size: 17px;
+    line-height: 1.1;
+}
+.btnListo {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(#fb761e, #7d0808);
+    box-shadow: 0 0 10px 3px #000000;
+}
+.btnListo:hover {
+    background: radial-gradient(#ff761a, #940909);
+}
+
+@keyframes globoAparece {
+    from {
+        opacity: 0;
+        bottom: -20px;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

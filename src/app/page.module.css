@@ -1,0 +1,30 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(#610404, #50006a, #000000);
+}
+.title {
+    font-size: 60px;
+    background: linear-gradient(to right, #B22222, #FF7518, #FFD700);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-bottom: 5px;
+}
+.mainContainer {
+    position: relative;
+    width: 90%;
+    max-width: 1580px;
+    height: 86%;
+    background-image: url("./img/background_scenario.avif");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 15px;
+    border-radius: 30px; 
+    box-shadow: 0 0 20px 2px #190c00;
+}
