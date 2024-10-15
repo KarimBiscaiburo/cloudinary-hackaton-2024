@@ -1,0 +1,16 @@
+.escenarioContainer {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: .3s all ease;
+}
+.escenarioActivo {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}

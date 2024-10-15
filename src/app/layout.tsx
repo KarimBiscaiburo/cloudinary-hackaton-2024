@@ -3,8 +3,8 @@ import "./globals.css";
 import { creepster } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "Cloudinary Hackaton 2024",
-  description: "Cloudinary Hackaton 2024",
+  title: "Cloudinary Hackathon 2024",
+  description: "Cloudinary Hackathon 2024",
 };
 
 export default function RootLayout({
