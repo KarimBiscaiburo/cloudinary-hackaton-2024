@@ -21,11 +21,11 @@ const textoBoton : string[] = [
 ]
 
 export default function GloboDialogo() {
-  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje } = useStore();
+  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario } = useStore();
     
   const mostrarDialogoClass = isGloboDialogoActive ? `${dialogo.globoContainer} ${dialogo.globoContainerActivo}` : `${dialogo.globoContainer}`
 
-  const funciones = [dialogoAgregarPersonaje, agregarPersonaje];
+  const funciones = [dialogoAgregarPersonaje, agregarPersonaje, cargarEscenarios];
 
   function dialogoAgregarPersonaje() {
     // Ocultar dialogo
@@ -47,6 +47,17 @@ export default function GloboDialogo() {
     setTimeout(() => {
       // Mostrar cargar personaje
       toggleCargarPersonaje();
+    }, 300)
+  }
+
+  function cargarEscenarios() {
+    // Ocultar avatar y dialogo
+    toggleAvatar();
+    toggleGloboDialogo();
+
+    setTimeout(() => {
+      // Mostrar escenarios
+      toggleEscenario();
     }, 300)
   }
 

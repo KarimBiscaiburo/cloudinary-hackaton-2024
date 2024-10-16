@@ -4,6 +4,8 @@
     left: 15px;
     width: calc(100% - 30px);
     height: calc(100% - 30px);
+    display: flex;
+    align-items: flex-end;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -13,4 +15,29 @@
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
+}
+.elementos {
+    display: flex;
+    gap: 10px;
+}
+.item {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+}
+.item h2 {
+    color: #DDD;
+    text-align: center;
+}
+.item button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(#fb761e, #7d0808);
+    box-shadow: 0 0 10px 3px #000000;
+}
+.item button:hover {
+    background: radial-gradient(#ff761a, #940909);
 }

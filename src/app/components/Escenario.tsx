@@ -16,16 +16,28 @@ const escenarios: IEscenarios = {
   }
 
 export default function Escenario() {
-    const { isEscenario } = useStore()
+    const { isEscenario, setEscenario, toggleEscenario } = useStore()
 
     const mostrarEscenariosClass = isEscenario ? `${escenario.escenarioContainer} ${escenario.escenarioActivo}` : `${escenario.escenarioContainer}`
 
+    function seleccionarEscenario(escena: string) {
+      setEscenario(escena);
+      // Ocultar seleccionar escenario
+      toggleEscenario();
+
+      setTimeout(() => {
+        console.log(escena)
+      }, 300)
+    }
+
     return (
         <article className={mostrarEscenariosClass}>
-          <div>
+          <div className={escenario.elementos}>
+            <div className={escenario.item}>
+              <h2>Brujas</h2>
               <CldImage 
-                width={300}
-                height={200}
+                width={400}
+                height={300}
                 sizes="100vw"
                 src={`${escenarios.brujas}`}
                 alt="escenario de brujas"
@@ -35,9 +47,14 @@ export default function Escenario() {
                   }
                 }}
               />
+              <button onClick={() => seleccionarEscenario(escenarios.brujas)}>Seleccionar</button>
+            </div>
+
+            <div className={escenario.item}>
+              <h2>Zombies</h2>
               <CldImage 
-                width={300}
-                height={200}
+                width={400}
+                height={300}
                 sizes="100vw"
                 src={`${escenarios.zombies}`}
                 alt="escenario de zombies"
@@ -47,9 +64,14 @@ export default function Escenario() {
                   }
                 }}
               />
+              <button onClick={() => seleccionarEscenario(escenarios.zombies)}>Seleccionar</button>
+            </div>
+            
+            <div className={escenario.item}>
+              <h2>Vampiros y Lobos</h2>
               <CldImage 
-                width={300}
-                height={200}
+                width={400}
+                height={300}
                 sizes="100vw"
                 src={`${escenarios.vampiros}`}
                 alt="escenario de vampiros"
@@ -59,6 +81,9 @@ export default function Escenario() {
                   }
                 }}
               />
+              <button onClick={() => seleccionarEscenario(escenarios.vampiros)}>Seleccionar</button>
+            </div>
+
           </div>
         </article>
     )

@@ -8,6 +8,7 @@ interface IStore {
     isCargarPersonaje: boolean,
     isSeleccionarEscenario: boolean,
     isEscenario: boolean,
+    escenario: string | undefined,
 
     setFase: (fase: number) => void,
     toggleAvatar: () => void,
@@ -15,8 +16,8 @@ interface IStore {
     toggleGloboDialogo: () => void,
     toggleCargarPersonaje: () => void,
     toggleSeleccionarEscenario: () => void,
-    toggleEscenario: () => void
-
+    toggleEscenario: () => void,
+    setEscenario: (escena: string) => void,
 }
 
 export const useStore = create<IStore>((set) => ({
@@ -27,6 +28,7 @@ export const useStore = create<IStore>((set) => ({
     isCargarPersonaje: false,
     isSeleccionarEscenario: false,
     isEscenario: false,
+    escenario: undefined,
 
     setFase: (fase: number) => set(() => ({ faseEstado: fase })),
     toggleAvatar: () => set((state) => ({ isAvatarActive: !state.isAvatarActive })),
@@ -35,5 +37,5 @@ export const useStore = create<IStore>((set) => ({
     toggleCargarPersonaje: () => set((state) => ({ isCargarPersonaje: !state.isCargarPersonaje })),
     toggleSeleccionarEscenario: () => set((state) => ({ isSeleccionarEscenario: !state.isSeleccionarEscenario })),
     toggleEscenario: () => set((state) => ({ isEscenario: !state.isEscenario})),
-
+    setEscenario: (escena: string) => set(() => ({ escenario: escena })),
 }))
