@@ -16,7 +16,7 @@ const escenarios: IEscenarios = {
   }
 
 export default function Escenario() {
-    const { isEscenario, setEscenario, toggleEscenario } = useStore()
+    const { isEscenario, setEscenario, toggleEscenario, togglePersonalizarEscenario } = useStore()
 
     const mostrarEscenariosClass = isEscenario ? `${escenario.escenarioContainer} ${escenario.escenarioActivo}` : `${escenario.escenarioContainer}`
 
@@ -26,7 +26,8 @@ export default function Escenario() {
       toggleEscenario();
 
       setTimeout(() => {
-        console.log(escena)
+        // Mostrar Personalizar escenario
+        togglePersonalizarEscenario();
       }, 300)
     }
 
@@ -37,7 +38,7 @@ export default function Escenario() {
               <h2>Brujas</h2>
               <CldImage 
                 width={400}
-                height={300}
+                height={250}
                 sizes="100vw"
                 src={`${escenarios.brujas}`}
                 alt="escenario de brujas"
@@ -54,7 +55,7 @@ export default function Escenario() {
               <h2>Zombies</h2>
               <CldImage 
                 width={400}
-                height={300}
+                height={250}
                 sizes="100vw"
                 src={`${escenarios.zombies}`}
                 alt="escenario de zombies"
@@ -71,7 +72,7 @@ export default function Escenario() {
               <h2>Vampiros y Lobos</h2>
               <CldImage 
                 width={400}
-                height={300}
+                height={250}
                 sizes="100vw"
                 src={`${escenarios.vampiros}`}
                 alt="escenario de vampiros"

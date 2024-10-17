@@ -10,6 +10,7 @@ import AvatarImage from "./components/AvatarImage";
 import Alerta from "./components/Alerta";
 import CargarPersonaje from "./components/CargarPersonaje";
 import Escenario from "./components/Escenario";
+import PersonalizarEscenario from "./components/PersonalizarEscenario";
 
 export default function Home() {
 
@@ -17,15 +18,17 @@ export default function Home() {
     <div className={`${special_elite.className} ${style.container}`}>
       <Alerta />
 
-      <h1 className={`${creepster.className} ${style.title}`}>Hackathon Halloween SpoOoOoOoky</h1>
+      <h1 className={`${creepster.className} ${style.title}`}>Hackathon Halloween SpoOoOoOoky PAPAAAA</h1>
 
-      <main className={`${style.mainContainer}`}>
+      <main className={`${style.mainContainer}`} id="mainContainer">
         
         <GloboDialogo />
 
         <CargarPersonaje />
 
         <Escenario />
+
+        <PersonalizarEscenario />
 
         <AvatarImage />
         

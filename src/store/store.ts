@@ -9,6 +9,7 @@ interface IStore {
     isSeleccionarEscenario: boolean,
     isEscenario: boolean,
     escenario: string | undefined,
+    isPersonalizarEscenario: boolean,
 
     setFase: (fase: number) => void,
     toggleAvatar: () => void,
@@ -18,6 +19,8 @@ interface IStore {
     toggleSeleccionarEscenario: () => void,
     toggleEscenario: () => void,
     setEscenario: (escena: string) => void,
+    togglePersonalizarEscenario: () => void,
+
 }
 
 export const useStore = create<IStore>((set) => ({
@@ -29,6 +32,7 @@ export const useStore = create<IStore>((set) => ({
     isSeleccionarEscenario: false,
     isEscenario: false,
     escenario: undefined,
+    isPersonalizarEscenario: false,
 
     setFase: (fase: number) => set(() => ({ faseEstado: fase })),
     toggleAvatar: () => set((state) => ({ isAvatarActive: !state.isAvatarActive })),
@@ -38,4 +42,5 @@ export const useStore = create<IStore>((set) => ({
     toggleSeleccionarEscenario: () => set((state) => ({ isSeleccionarEscenario: !state.isSeleccionarEscenario })),
     toggleEscenario: () => set((state) => ({ isEscenario: !state.isEscenario})),
     setEscenario: (escena: string) => set(() => ({ escenario: escena })),
+    togglePersonalizarEscenario: () => set((state) => ({ isPersonalizarEscenario: !state.isPersonalizarEscenario})),
 }))
