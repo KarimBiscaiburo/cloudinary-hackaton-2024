@@ -1,6 +1,6 @@
 import { useStore } from "@/store/store";
-import { useState } from "react";
-import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
+// import { useState } from "react";
+import { CldUploadWidget, /*CloudinaryUploadWidgetInfo */ } from "next-cloudinary";
 
 import cargarPersonaje from "../css/cargarPersonaje.module.css";
 
@@ -55,7 +55,7 @@ export default function CargarPersonaje() {
                   }
                 }
               }}
-              onSuccess={(result) => {
+              onSuccess={(/*result*/) => {
                 // setResource(result?.info);  // { public_id, secure_url, etc }
                 finCargarPersonaje();
               }}
