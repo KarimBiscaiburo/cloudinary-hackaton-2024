@@ -7,7 +7,7 @@ import cargarPersonaje from "../css/cargarPersonaje.module.css";
 export default function CargarPersonaje() {
     const { isCargarPersonaje, toggleAlerta, toggleAvatar, toggleCargarPersonaje, toggleGloboDialogo, toggleSeleccionarEscenario, setFase } = useStore();
 
-    const [resource, setResource] = useState<string | CloudinaryUploadWidgetInfo | undefined>(undefined);
+    // const [resource, setResource] = useState<string | CloudinaryUploadWidgetInfo | undefined>(undefined);
 
     const mostrarCargarPersonajeClass = isCargarPersonaje ? `${cargarPersonaje.cargarPersonajeContainer} ${cargarPersonaje.cargarPersonajeContainerActivo}` : `${cargarPersonaje.cargarPersonajeContainer}`;
 
@@ -56,7 +56,7 @@ export default function CargarPersonaje() {
                 }
               }}
               onSuccess={(result) => {
-                setResource(result?.info);  // { public_id, secure_url, etc }
+                // setResource(result?.info);  // { public_id, secure_url, etc }
                 finCargarPersonaje();
               }}
               onQueuesEnd={(result, { widget }) => {

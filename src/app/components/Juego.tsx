@@ -19,8 +19,14 @@ interface IGolosina {
     puntos: number
 }
 
+let comienzo = true;
+
 // 10seg
 const tiempoDeJuego: number = 10000;
+// Tiempo que tarda en caer la golosina (segundos)
+let tiempoGolosinaSeg = 5;
+// Tiempo que tarda en desaparecer la golosina (milisegundos)
+let tiempoGolosinaMil = 5000;
 
 const golosinas: IGolosina[] = [
     {imagen: paloteRojo, puntos: 5}, 
@@ -32,19 +38,18 @@ const golosinas: IGolosina[] = [
 ]
 
 export default function Juego() {
-    const { isJugar } = useStore();
+    const { isJugar, isBtnJugar, toggleBtnJugar } = useStore();
 
     const [ronda, setRonda] = useState(1);
     const [puntosTotales, setPuntosTotales] = useState(0);
     const [puntosObjetivo, setPuntosObjetivo] = useState(50);
     const [contadorPuntosObjetivo, setContadorPuntosObjetivo] = useState(0);
-    const [tiempoGolosinaSeg, setTiempoGolosinaSeg] = useState(10);
-    const [tiempoGolosinaMil, setTiempoGolosinaMil] = useState(10000);
 
-    // Variable para determinar si todavía no perdio
-    // let isGanando : boolean = true;
-    // Variable para activar o desactivar cada ronda
-    // let juegoActivo : boolean = true;
+    const [siguienteRonda, setSiguienteRonda] = useState(false);
+
+    const btnJuegoClass =  isBtnJugar ? `${juego.btnComenzar} ${juego.btnActivo}` : `${juego.btnComenzar}`;
+    const juegoClass = isJugar ? `${juego.juegoContainer} ${juego.containerActivo}` : `${juego.juegoContainer}`;
+    const siguienteRondaClass = siguienteRonda ? `${juego.siguienteRonda} ${juego.siguienteRondaActivo}` : `${juego.siguienteRonda}`
 
     // Usar useRef para almacenar el contador de puntos
     const contadorPuntosObjetivoRef = useRef(contadorPuntosObjetivo);
@@ -56,8 +61,16 @@ export default function Juego() {
         puntosObjetivosRef.current = puntosObjetivo;
     }, [contadorPuntosObjetivo, puntosObjetivo]);
 
-    function prueba() {
-        console.log("empezando")
+    function comenzarJuego() {
+
+        // Cambiar el estado solo la primera vez
+        if(comienzo) {
+            // Desactivar boton
+            toggleBtnJugar();
+            comienzo = false;
+        }      
+
+        console.log(tiempoGolosinaSeg, tiempoGolosinaMil)
 
         // Intervalo donde van a ir cayendo las golosinas
         const intervaloJuego = setInterval(() => {  
@@ -66,19 +79,20 @@ export default function Juego() {
 
         setTimeout(() => {
             clearInterval(intervaloJuego); // Detiene el ciclo cuando termina la ronda
-
-            console.log(contadorPuntosObjetivoRef.current >= puntosObjetivosRef.current)
-            console.log(contadorPuntosObjetivoRef.current, puntosObjetivosRef.current)
-            // Verificar si completo con el objetivo de golosinas recolectadas
-            if (contadorPuntosObjetivoRef.current >= puntosObjetivosRef.current) {
-                // Pasa a la siguiente ronda
-                avanzarRonda();
-                // Ejecuta nuevamente el juego
-                prueba();
-            } else {
-                console.log("juego terminado")
-            }
-
+            
+            // Pequeño retraso para esperar que terminen de caer todas las golosinas
+            setTimeout(() => {
+                setSiguienteRonda(false);
+                // Verificar si completo con el objetivo de golosinas recolectadas
+                if (contadorPuntosObjetivoRef.current >= puntosObjetivosRef.current) {
+                    // Pasa a la siguiente ronda
+                    avanzarRonda();
+                    // Ejecuta nuevamente el juego
+                    comenzarJuego();
+                } else {
+                    console.log("juego terminado")
+                }
+            }, tiempoGolosinaMil)
         }, tiempoDeJuego);
     }
 
@@ -86,8 +100,8 @@ export default function Juego() {
         // Siguiente ronda
         setRonda(prev => prev + 1);
         // Tiempo de caida mas rápido
-        setTiempoGolosinaSeg(prev => prev - .5);
-        setTiempoGolosinaMil(prev => prev - 500);
+        tiempoGolosinaMil -= 500;
+        tiempoGolosinaSeg -= .5;
 
         // Aumentar el objetivo de puntos
         setPuntosObjetivo(prev => prev + 50);
@@ -115,6 +129,7 @@ export default function Juego() {
             golosina.style.backgroundImage = `url(${golosinas[posImgGolosina].imagen.src})`;
             golosina.style.left = `${posicionGolosina}px`;
             golosina.style.animationDuration = `${tiempoGolosinaSeg}s`;
+            golosina.draggable = false;
 
             golosina.addEventListener("click", () => sumarPuntos(golosinas[posImgGolosina].puntos, golosina))
 
@@ -125,8 +140,6 @@ export default function Juego() {
             }, tiempoGolosinaMil)
         }
     }
-
-    const juegoClass = isJugar ? `${juego.juegoContainer} ${juego.containerActivo}` : `${juego.juegoContainer}`;
 
     return (
         <article className={juegoClass} id="contenedorJuego">
@@ -155,7 +168,8 @@ export default function Juego() {
                     <p>Ronda: {ronda}</p>
                 </div>
             </div>
-            <button className={juego.comenzar} onClick={prueba}>¡Comenzar!</button>
+            <button className={btnJuegoClass} onClick={comenzarJuego}>¡Comenzar!</button>
+            <p className={siguienteRondaClass}>¡Siguiente Ronda!</p>
         </article>
     )
 }

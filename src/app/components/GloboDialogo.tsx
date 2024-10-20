@@ -35,7 +35,7 @@ const textoBoton : string[] = [
 ]
 
 export default function GloboDialogo() {
-  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario, toggleJugar } = useStore();
+  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario, toggleJugar, toggleBtnJugar } = useStore();
     
   const mostrarDialogoClass = isGloboDialogoActive ? `${dialogo.globoContainer} ${dialogo.globoContainerActivo}` : `${dialogo.globoContainer}`
 
@@ -92,8 +92,9 @@ export default function GloboDialogo() {
     toggleGloboDialogo();
 
     setTimeout(() => {
-      // Mostrar escenario de juego
+      // Mostrar escenario de juego y activar btn de comenzar
       toggleJugar();
+      toggleBtnJugar();
     }, 300);
   }
 
