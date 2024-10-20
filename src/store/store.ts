@@ -10,6 +10,7 @@ interface IStore {
     isEscenario: boolean,
     escenario: string | undefined,
     isPersonalizarEscenario: boolean,
+    isJugar: boolean,
 
     setFase: (fase: number) => void,
     toggleAvatar: () => void,
@@ -20,7 +21,7 @@ interface IStore {
     toggleEscenario: () => void,
     setEscenario: (escena: string) => void,
     togglePersonalizarEscenario: () => void,
-
+    toggleJugar: () => void,
 }
 
 export const useStore = create<IStore>((set) => ({
@@ -33,6 +34,7 @@ export const useStore = create<IStore>((set) => ({
     isEscenario: false,
     escenario: undefined,
     isPersonalizarEscenario: false,
+    isJugar: false,
 
     setFase: (fase: number) => set(() => ({ faseEstado: fase })),
     toggleAvatar: () => set((state) => ({ isAvatarActive: !state.isAvatarActive })),
@@ -43,4 +45,5 @@ export const useStore = create<IStore>((set) => ({
     toggleEscenario: () => set((state) => ({ isEscenario: !state.isEscenario})),
     setEscenario: (escena: string) => set(() => ({ escenario: escena })),
     togglePersonalizarEscenario: () => set((state) => ({ isPersonalizarEscenario: !state.isPersonalizarEscenario})),
+    toggleJugar: () => set((state) => ({ isJugar: !state.isJugar})),
 }))

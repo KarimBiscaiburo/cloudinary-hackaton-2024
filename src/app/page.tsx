@@ -1,5 +1,4 @@
 'use client'
-
 import { creepster, special_elite } from "./fonts";
 
 import style from "./page.module.css";
@@ -11,6 +10,7 @@ import Alerta from "./components/Alerta";
 import CargarPersonaje from "./components/CargarPersonaje";
 import Escenario from "./components/Escenario";
 import PersonalizarEscenario from "./components/PersonalizarEscenario";
+import Juego from "./components/Juego";
 
 export default function Home() {
 
@@ -18,7 +18,7 @@ export default function Home() {
     <div className={`${special_elite.className} ${style.container}`}>
       <Alerta />
 
-      <h1 className={`${creepster.className} ${style.title}`}>Hackathon Halloween SpoOoOoOoky PAPAAAA</h1>
+      <h1 className={`${creepster.className} ${style.title}`}>Hackathon Halloween Spooky PAPAAAA</h1>
 
       <main className={`${style.mainContainer}`} id="mainContainer">
         
@@ -29,6 +29,8 @@ export default function Home() {
         <Escenario />
 
         <PersonalizarEscenario />
+
+        <Juego />
 
         <AvatarImage />
         

@@ -65,15 +65,15 @@ export default function PersonalizarEscenario() {
 
     function elegirEscenario() {
         const mainContainer : HTMLElement | null = document.querySelector("#mainContainer");
-        
-        if (mainContainer) {
-            mainContainer.style.backgroundImage = `url('${escenarioTransformadoUrl}')`;
-        }
 
         // Ocultar personalizar escenario
         togglePersonalizarEscenario();
 
         setTimeout(() => {
+            if (mainContainer) {
+                mainContainer.style.backgroundImage = `url('${escenarioTransformadoUrl}')`;
+            }
+
             setFase(3)
             //Mostrar Avatar y dialogo
             toggleAvatar();

@@ -1,0 +1,79 @@
+.juegoContainer {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: .3s all ease;
+    overflow: hidden;
+}
+.containerActivo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.estadisticasContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.puntajesContainer {
+    display: flex;
+    gap: 10px;
+}
+.puntajeObjetivo, .puntajeTotal {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #000000a7;
+    border-radius: 5px;
+}
+.rondaContainer {
+    padding: 10px;
+    background-color: #000000a7;
+    border-radius: 5px;
+}
+.puntajeObjetivo p, .puntajeTotal p, .rondaContainer p {
+    color: #DDD;
+    font-size: 20px;
+}
+.comenzar {
+    position: absolute;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    top: 50%;
+    left: 50%;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(#fb761e, #7d0808);
+    box-shadow: 0 0 10px 3px #000000;
+    color: #000;
+    transform: translate(-50%, -50%);
+}
+.comenzar:hover {
+    background: radial-gradient(#ff761a, #940909);
+}
+.golosina {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation-name: golosinaBaja;
+    animation-timing-function: ease;
+    cursor: pointer;
+}
+@keyframes golosinaBaja {
+    from {
+        top: 0;
+    }
+    to {
+        top: 100%;
+    }
+}
