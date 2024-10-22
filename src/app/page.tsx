@@ -7,7 +7,6 @@ import style from "./page.module.css";
 import GloboDialogo from "./components/GloboDialogo";
 import AvatarImage from "./components/AvatarImage";
 import Alerta from "./components/Alerta";
-import CargarPersonaje from "./components/CargarPersonaje";
 import Escenario from "./components/Escenario";
 import PersonalizarEscenario from "./components/PersonalizarEscenario";
 import Juego from "./components/Juego";
@@ -24,8 +23,6 @@ export default function Home() {
       <main className={`${style.mainContainer}`} id="mainContainer">
         
         <GloboDialogo />
-
-        <CargarPersonaje />
 
         <Escenario />
 

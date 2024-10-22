@@ -95,7 +95,7 @@ export default function Juego() {
                     // Mostrar avatar y globo diálogo
                     toggleAvatar();
                     toggleGloboDialogo();
-                    setFase(5);
+                    setFase(4);
 
                     // Guardar datos del intento
                     agregarIntento({ronda: rondasRef.current, puntos: puntosTotalesRef.current});

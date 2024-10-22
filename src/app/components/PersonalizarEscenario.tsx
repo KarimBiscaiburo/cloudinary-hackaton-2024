@@ -74,7 +74,7 @@ export default function PersonalizarEscenario() {
                 mainContainer.style.backgroundImage = `url('${escenarioTransformadoUrl}')`;
             }
 
-            setFase(3)
+            setFase(2)
             //Mostrar Avatar y dialogo
             toggleAvatar();
             toggleGloboDialogo();
