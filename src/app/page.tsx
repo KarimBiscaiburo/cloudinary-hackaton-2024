@@ -6,7 +6,6 @@ import style from "./page.module.css";
 // Componentes
 import GloboDialogo from "./components/GloboDialogo";
 import AvatarImage from "./components/AvatarImage";
-import Alerta from "./components/Alerta";
 import Escenario from "./components/Escenario";
 import PersonalizarEscenario from "./components/PersonalizarEscenario";
 import Juego from "./components/Juego";
@@ -16,7 +15,6 @@ export default function Home() {
 
   return (
     <div className={`${special_elite.className} ${style.container}`}>
-      <Alerta />
 
       <h1 className={`${creepster.className} ${style.title}`}>Hackathon Halloween Spooky PAPAAAA</h1>
 
@@ -35,6 +33,10 @@ export default function Home() {
         <AvatarImage />
         
       </main>
+
+      <div className={style.avisoResponsive}>
+        <p>Lo siento pero para que la experiencia, durante el juego, sea la misma para todos los participantes es necesario utilizar un tamaño de pantalla más grande</p>
+      </div>
     </div>
   );
 }

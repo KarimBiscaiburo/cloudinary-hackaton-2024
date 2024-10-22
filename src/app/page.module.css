@@ -16,6 +16,7 @@
     margin-bottom: 5px;
 }
 .mainContainer {
+    display: block;
     position: relative;
     width: 90%;
     max-width: 1580px;
@@ -27,4 +28,25 @@
     padding: 15px;
     border-radius: 30px; 
     box-shadow: 0 0 20px 2px #190c00;
+}
+.avisoResponsive {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .mainContainer {
+        display: none;
+    }
+    .avisoResponsive {
+        display: block;
+        max-width: 700px;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #130101cf;
+    }
+    .avisoResponsive p {
+        color: #DDD;
+        font-size: 25px;
+    }
 }

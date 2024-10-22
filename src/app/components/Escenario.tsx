@@ -40,6 +40,7 @@ export default function Escenario() {
                 width={400}
                 height={250}
                 sizes="100vw"
+                className={escenario.itemImagen}
                 src={`${escenarios.brujas}`}
                 alt="escenario de brujas"
                 config={{
@@ -56,6 +57,7 @@ export default function Escenario() {
               <CldImage 
                 width={400}
                 height={250}
+                className={escenario.itemImagen}
                 sizes="100vw"
                 src={`${escenarios.zombies}`}
                 alt="escenario de zombies"
@@ -73,6 +75,7 @@ export default function Escenario() {
               <CldImage 
                 width={400}
                 height={250}
+                className={escenario.itemImagen}
                 sizes="100vw"
                 src={`${escenarios.vampiros}`}
                 alt="escenario de vampiros"

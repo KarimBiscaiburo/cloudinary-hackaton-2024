@@ -19,6 +19,7 @@
 .elementos {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap-reverse;
 }
 .item {
     display: flex;

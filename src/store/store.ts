@@ -3,7 +3,6 @@ import { create } from "zustand";
 interface IStore {
     faseEstado: number,
     isAvatarActive: boolean,
-    isAlertaActive: boolean,
     isGloboDialogoActive: boolean,
     isSeleccionarEscenario: boolean,
     isEscenario: boolean,
@@ -17,7 +16,6 @@ interface IStore {
 
     setFase: (fase: number) => void,
     toggleAvatar: () => void,
-    toggleAlerta: () => void,
     toggleGloboDialogo: () => void,
     toggleSeleccionarEscenario: () => void,
     toggleEscenario: () => void,
@@ -33,7 +31,6 @@ interface IStore {
 export const useStore = create<IStore>((set) => ({
     faseEstado: 0,
     isAvatarActive: true,
-    isAlertaActive: false,
     isGloboDialogoActive: true,
     isSeleccionarEscenario: false,
     isEscenario: false,
@@ -47,7 +44,6 @@ export const useStore = create<IStore>((set) => ({
 
     setFase: (fase: number) => set(() => ({ faseEstado: fase })),
     toggleAvatar: () => set((state) => ({ isAvatarActive: !state.isAvatarActive })),
-    toggleAlerta: () => set((state) => ({ isAlertaActive: !state.isAlertaActive })),
     toggleGloboDialogo: () => set((state) => ({ isGloboDialogoActive: !state.isGloboDialogoActive })),
     toggleSeleccionarEscenario: () => set((state) => ({ isSeleccionarEscenario: !state.isSeleccionarEscenario })),
     toggleEscenario: () => set((state) => ({ isEscenario: !state.isEscenario})),
