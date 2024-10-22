@@ -8,11 +8,7 @@ const dialogos : Array<string>[] = [
         "¿Te atreves a entrar y vivir una experiencia escalofriante? Una vez que cruces el umbral, no habrá vuelta atrás. La oscuridad te está esperando… ¿Estás preparado para enfrentar lo que se oculta en las sombras?"
     ], 
     [
-        "Primero vas a tener que crear tu personaje, así que elíje la foto que más te guste para representarlo. Puede ser un perro, delfín, avión, ZOMBIE o lo que tú quieras!!!!",
-        "Solo procura que se distinga el personaje del fondo. Esto para que luego se lo quitemos y lo ubiquemos donde corresponde... EL ESCENARIO QUE VOS ELIJAS!!!"
-    ], 
-    [
-      "Perfecto, ahora elige un escenario y personalízalo de la manera que más te guste. Puedes reemplazar lo que quieras!"
+      "Primero vas a tener que eligir un escenario y personalízalo de la manera que más te guste. Puedes reemplazar lo que quieras!"
     ], 
     [
       "Ahora es momento de empezar con lo divertido!!!",
@@ -31,7 +27,6 @@ const dialogos : Array<string>[] = [
 
 const textoBoton : string[] = [
     "¡Estoy listo!",
-    "¡Entendido!",
     "¡Estupendo!",
     "Ver reglas",
     "¡Perfecto!",
@@ -39,11 +34,11 @@ const textoBoton : string[] = [
 ]
 
 export default function GloboDialogo() {
-  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario, toggleJugar, toggleBtnJugar, toggleTablero } = useStore();
+  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleEscenario, toggleJugar, toggleBtnJugar, toggleTablero } = useStore();
     
   const mostrarDialogoClass = isGloboDialogoActive ? `${dialogo.globoContainer} ${dialogo.globoContainerActivo}` : `${dialogo.globoContainer}`
 
-  const funciones = [dialogoAgregarPersonaje, agregarPersonaje, cargarEscenarios, verReglas, jugar, mostrarRanking];
+  const funciones = [dialogoAgregarPersonaje, cargarEscenarios, verReglas, jugar, mostrarRanking];
 
   function dialogoAgregarPersonaje() {
     // Ocultar dialogo
@@ -53,18 +48,6 @@ export default function GloboDialogo() {
       // Mostrar dialogo
       toggleGloboDialogo();
       setFase(1);
-    }, 300)
-  }
-
-  function agregarPersonaje() {
-    // Ocultar avatar y dialogo
-    toggleAvatar();
-    toggleGloboDialogo();
-
-    // Delay para que se vaya el avatar primero
-    setTimeout(() => {
-      // Mostrar cargar personaje
-      toggleCargarPersonaje();
     }, 300)
   }
 
@@ -84,7 +67,7 @@ export default function GloboDialogo() {
     toggleGloboDialogo();
 
     setTimeout(() => {
-      setFase(4);
+      setFase(3);
       // Mostrar dialogo
       toggleGloboDialogo();
     }, 300)
