@@ -12,7 +12,7 @@ interface IStore {
     isJugar: boolean,
     isBtnJugar: boolean,
     isTablero: boolean,
-    intentos: {ronda: number, puntos: number}[]
+    intentos: {ronda: number, puntos: number}[],
 
     setFase: (fase: number) => void,
     toggleAvatar: () => void,
