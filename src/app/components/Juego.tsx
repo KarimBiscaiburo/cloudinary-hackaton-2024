@@ -19,14 +19,14 @@ interface IGolosina {
     puntos: number
 }
 
-let comienzo = true;
-
 // 10seg
 const tiempoDeJuego: number = 10000;
 // Tiempo que tarda en caer la golosina (segundos)
 let tiempoGolosinaSeg = 5;
 // Tiempo que tarda en desaparecer la golosina (milisegundos)
 let tiempoGolosinaMil = 5000;
+// Tiempo que tarda en crear otra golosina (milisegundos)
+let tiempoCrearGolosina = 500;
 
 const golosinas: IGolosina[] = [
     {imagen: paloteRojo, puntos: 5}, 
@@ -38,51 +38,53 @@ const golosinas: IGolosina[] = [
 ]
 
 export default function Juego() {
-    const { isJugar, isBtnJugar, toggleBtnJugar } = useStore();
+    const { isJugar, isBtnJugar, isComienzo, toggleBtnJugar, toggleAvatar, toggleGloboDialogo, setFase, toggleJugar, agregarIntento, toggleComienzo } = useStore();
 
     const [ronda, setRonda] = useState(1);
     const [puntosTotales, setPuntosTotales] = useState(0);
     const [puntosObjetivo, setPuntosObjetivo] = useState(50);
     const [contadorPuntosObjetivo, setContadorPuntosObjetivo] = useState(0);
 
-    const [siguienteRonda, setSiguienteRonda] = useState(false);
-
     const btnJuegoClass =  isBtnJugar ? `${juego.btnComenzar} ${juego.btnActivo}` : `${juego.btnComenzar}`;
     const juegoClass = isJugar ? `${juego.juegoContainer} ${juego.containerActivo}` : `${juego.juegoContainer}`;
-    const siguienteRondaClass = siguienteRonda ? `${juego.siguienteRonda} ${juego.siguienteRondaActivo}` : `${juego.siguienteRonda}`
 
     // Usar useRef para almacenar el contador de puntos
     const contadorPuntosObjetivoRef = useRef(contadorPuntosObjetivo);
     const puntosObjetivosRef = useRef(puntosObjetivo);
+    const puntosTotalesRef = useRef(puntosTotales);
+    const rondasRef = useRef(ronda);
+    const comienzoRef = useRef(isComienzo);
 
     useEffect(() => {
-        // Actualizar el ref cuando contadorPuntosObjetivo cambie
+        comienzoRef.current = isComienzo;
+
+        // Valor actual de los puntos
         contadorPuntosObjetivoRef.current = contadorPuntosObjetivo;
         puntosObjetivosRef.current = puntosObjetivo;
-    }, [contadorPuntosObjetivo, puntosObjetivo]);
+
+        puntosTotalesRef.current = puntosTotales;
+        rondasRef.current = ronda;
+    }, [contadorPuntosObjetivo, puntosObjetivo, puntosTotales, ronda, isComienzo]);
 
     function comenzarJuego() {
 
         // Cambiar el estado solo la primera vez
-        if(comienzo) {
+        if(comienzoRef.current) {
             // Desactivar boton
             toggleBtnJugar();
-            comienzo = false;
+            toggleComienzo();
         }      
-
-        console.log(tiempoGolosinaSeg, tiempoGolosinaMil)
 
         // Intervalo donde van a ir cayendo las golosinas
         const intervaloJuego = setInterval(() => {  
             agregarGolosina();
-        }, 500)
+        }, tiempoCrearGolosina);
 
         setTimeout(() => {
             clearInterval(intervaloJuego); // Detiene el ciclo cuando termina la ronda
             
             // Pequeño retraso para esperar que terminen de caer todas las golosinas
             setTimeout(() => {
-                setSiguienteRonda(false);
                 // Verificar si completo con el objetivo de golosinas recolectadas
                 if (contadorPuntosObjetivoRef.current >= puntosObjetivosRef.current) {
                     // Pasa a la siguiente ronda
@@ -90,7 +92,25 @@ export default function Juego() {
                     // Ejecuta nuevamente el juego
                     comenzarJuego();
                 } else {
-                    console.log("juego terminado")
+                    // Mostrar avatar y globo diálogo
+                    toggleAvatar();
+                    toggleGloboDialogo();
+                    setFase(5);
+
+                    // Guardar datos del intento
+                    agregarIntento({ronda: rondasRef.current, puntos: puntosTotalesRef.current});
+
+                    // Volver los datos al inicio
+                    setRonda(1);
+                    setPuntosTotales(0);
+                    setPuntosObjetivo(50);
+                    setContadorPuntosObjetivo(0);
+                    tiempoGolosinaSeg = 5;
+                    tiempoGolosinaMil = 5000;
+                    tiempoCrearGolosina = 500;
+
+                    // Ocultar juego
+                    toggleJugar();
                 }
             }, tiempoGolosinaMil)
         }, tiempoDeJuego);
@@ -102,6 +122,7 @@ export default function Juego() {
         // Tiempo de caida mas rápido
         tiempoGolosinaMil -= 500;
         tiempoGolosinaSeg -= .5;
+        tiempoCrearGolosina -= 50;
 
         // Aumentar el objetivo de puntos
         setPuntosObjetivo(prev => prev + 50);
@@ -120,7 +141,7 @@ export default function Juego() {
 
         if (pantallaJuego) {
             const anchoPantalla = pantallaJuego.offsetWidth;
-            const posicionGolosina = Math.floor((Math.random() * anchoPantalla) - 30);
+            const posicionGolosina = Math.floor(Math.random() * (anchoPantalla - 60));
 
             const posImgGolosina = Math.floor(Math.random() * 6)
 
@@ -169,7 +190,6 @@ export default function Juego() {
                 </div>
             </div>
             <button className={btnJuegoClass} onClick={comenzarJuego}>¡Comenzar!</button>
-            <p className={siguienteRondaClass}>¡Siguiente Ronda!</p>
         </article>
     )
 }

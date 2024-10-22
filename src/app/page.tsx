@@ -11,6 +11,7 @@ import CargarPersonaje from "./components/CargarPersonaje";
 import Escenario from "./components/Escenario";
 import PersonalizarEscenario from "./components/PersonalizarEscenario";
 import Juego from "./components/Juego";
+import Tablero from "./components/Tablero";
 
 export default function Home() {
 
@@ -31,6 +32,8 @@ export default function Home() {
         <PersonalizarEscenario />
 
         <Juego />
+
+        <Tablero />
 
         <AvatarImage />
         
