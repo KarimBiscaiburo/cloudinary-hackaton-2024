@@ -12,7 +12,7 @@ const dialogos : Array<string>[] = [
         "Solo procura que se distinga el personaje del fondo. Esto para que luego se lo quitemos y lo ubiquemos donde corresponde... EL ESCENARIO QUE VOS ELIJAS!!!"
     ], 
     [
-      "Perfecto, ahora elije un escenario y personalízalo de la manera que más te guste. Puedes reemplazar lo que quieras!"
+      "Perfecto, ahora elige un escenario y personalízalo de la manera que más te guste. Puedes reemplazar lo que quieras!"
     ], 
     [
       "Ahora es momento de empezar con lo divertido!!!",
@@ -21,8 +21,11 @@ const dialogos : Array<string>[] = [
     [
       "* Por cada ronda, van a ir cayendo golosinas que tendrás que agarrar y llegar a cumplir con el objetivo de puntos.",
       "* Cada golosina tiene un puntaje diferente.",
-      "* Cada 10seg aumentara la dificultad de la ronda, el objetivo de puntos sera mayor y la velocidad en la que caen las golosinas tambien.",
+      "* Cada 10seg aumentara la dificultad de la ronda, el objetivo de puntos sera mayor y la velocidad en la que caen las golosinas también.",
       "* Perderás cuando no consigas alcanzar el objetivo."
+    ],
+    [
+      "Eeeeepa, ni mi novia me terminó tan rápido... Pero bueno, que le vamos a hacer, si queres podes intentarlo de nuevo o cambiar de escenario. Pero no te rindas, capaz esta vez puedas aguantar mas..."
     ]
 ]
 
@@ -31,15 +34,16 @@ const textoBoton : string[] = [
     "¡Entendido!",
     "¡Estupendo!",
     "Ver reglas",
-    "¡Perfecto!"
+    "¡Perfecto!",
+    "Continuar"
 ]
 
 export default function GloboDialogo() {
-  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario, toggleJugar, toggleBtnJugar } = useStore();
+  const { isGloboDialogoActive, faseEstado, toggleAvatar, setFase, toggleGloboDialogo, toggleCargarPersonaje, toggleEscenario, toggleJugar, toggleBtnJugar, toggleTablero } = useStore();
     
   const mostrarDialogoClass = isGloboDialogoActive ? `${dialogo.globoContainer} ${dialogo.globoContainerActivo}` : `${dialogo.globoContainer}`
 
-  const funciones = [dialogoAgregarPersonaje, agregarPersonaje, cargarEscenarios, verReglas, jugar];
+  const funciones = [dialogoAgregarPersonaje, agregarPersonaje, cargarEscenarios, verReglas, jugar, mostrarRanking];
 
   function dialogoAgregarPersonaje() {
     // Ocultar dialogo
@@ -96,6 +100,15 @@ export default function GloboDialogo() {
       toggleJugar();
       toggleBtnJugar();
     }, 300);
+  }
+
+  function mostrarRanking() {
+    // Ocultar avatar y diálogo
+    toggleAvatar();
+    toggleGloboDialogo();
+
+    // Mostrar Ranking
+    toggleTablero();
   }
 
   return (
