@@ -18,32 +18,34 @@ import iconoMute from "./img/mute.png"
 
 export default function Home() {
   const [musicaIniciada, setMusicaIniciada] = useState(false);
-  const [musicaAudio] = useState(new Audio("/audio/musicaHalloween.mp3"));
-  const [isMuted, setIsMuted] = useState(false); 
+  const [musicaAudio, setMusicaAudio] = useState<HTMLAudioElement | null>(null);
+  const [isMuted, setIsMuted] = useState(true); 
 
   useEffect(() => {
-    musicaAudio.volume = isMuted ? 0 : 0.1; 
-    musicaAudio.loop = true;
-  }, [isMuted, musicaAudio]);
+    if(musicaAudio) {
+      musicaAudio.volume = isMuted ? 0 : 0.1;
+    }
+  }, [isMuted, musicaAudio])
 
-  const handlerMusica = () => {
+  function handlerMusica() {
     if (!musicaIniciada) {
-      musicaAudio.play().then(() => {
+      const audio = new Audio("/audio/musicaHalloween.mp3");
+      audio.volume = 0.1;
+      audio.loop = true;
+
+      audio.play().then(() => {
         console.log("Reproduciendo música");
+        setMusicaAudio(audio);
         setMusicaIniciada(true);
+        setIsMuted(false)
       }).catch((e) => {
         console.log("Error", e);
       });
-    } else {
-
-      if (isMuted) {
-        console.log("Desactivando");
-        setIsMuted(false); 
-      } else {
-        console.log("Activando");
-        setIsMuted(true); 
-      }
+      
+      return;
     }
+
+    setIsMuted(!isMuted)
   };
 
   return (
